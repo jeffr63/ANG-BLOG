@@ -22,7 +22,7 @@ export const APP_ROUTES: Routes = [
   },
   {
     path: 'terms-conditions',
-    title: 'Terms and Conditions',
+    title: 'Terms & Conditions',
     loadComponent: () =>
       import('./pages/terms-and-conditions/terms-and-conditions.component'),
   },
