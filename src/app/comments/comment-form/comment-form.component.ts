@@ -44,13 +44,6 @@ import { CommonModule } from '@angular/common';
       input[type='email'] {
         width: 100%;
       }
-
-      .btn-theme {
-        height: 50px;
-        border: none;
-        font-size: 13px;
-        background-color: var(--primary-color);
-      }
     `,
   ],
 })

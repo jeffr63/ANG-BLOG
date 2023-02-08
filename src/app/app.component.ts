@@ -9,6 +9,13 @@ import SubscriptionFormComponent from './subscription-form/subscription-form.com
 @Component({
   selector: 'app-root',
   standalone: true,
+  imports: [
+    RouterOutlet,
+    HeaderComponent,
+    CategoryNavbarComponent,
+    FooterComponent,
+    SubscriptionFormComponent,
+  ],
   template: `
     <app-header></app-header>
 
@@ -31,13 +38,6 @@ import SubscriptionFormComponent from './subscription-form/subscription-form.com
         margin-top: 150px;
       }
     `,
-  ],
-  imports: [
-    RouterOutlet,
-    HeaderComponent,
-    CategoryNavbarComponent,
-    FooterComponent,
-    SubscriptionFormComponent,
   ],
 })
 export class AppComponent {
