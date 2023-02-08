@@ -1,37 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { Post } from 'src/app/models/post';
 
 @Component({
   selector: 'app-post-card',
   standalone: true,
-  imports: [CommonModule],
   template: `
-    <div class="card shadow-effect">
+    <div class="card shadow-effect" *ngIf="postData">
       <img
         class="card-img-top"
-        src="https://images.pexels.com/photos/1174932/pexels-photo-1174932.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        src="{{ postData.postImg }}"
         alt="Person's hand with paints"
       />
       <div class="card-body">
-        <small class="bg-light text-danger text-center">Design</small>
+        <small class="bg-light text-danger text-center">{{
+          postData.category.category
+        }}</small>
         <small class="bg-light text-success text-center ml-3">Featured</small>
         <small class="bg-light text-info text-center ml-3"
-          >Views - 100,256</small
+          >Views - {{ postData.views }}</small
         >
 
-        <h5 class="mt-1">HOW TO START A BLOG IN 2021 EDITED NEW CATEGORY</h5>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-          vestibulum augue vitae mauris sollicitudin mattis. Lorem ipsum dolor
-          sit amet, consectetur adipiscing elit. Phasellus suscipit leo tempus
-          leo egestas efficitur. Proin non semper enim, quis semper odio. Sed at
-          ex at lacus volutpat consequat. Aenean nec tellus vel metus blandit
-          semper eu vitae tellus. Vestibulum tincidunt metus libero, in tempor
-          lacus tristique in.
-        </p>
-        <small class="bg-light text-warning text-center"
-          >LAST UPDATED - SEP 20, 2020</small
-        >
+        <h5 class="mt-1">{{ postData.title }}</h5>
+        <p>{{ postData.excerpt }}</p>
+        <small class="bg-light text-warning text-center">
+          LAST UPDATED - {{ postData.createdAt | date }}
+        </small>
       </div>
     </div>
   `,
@@ -39,8 +34,12 @@ import { CommonModule } from '@angular/common';
     `
       .card {
         max-width: 400px;
+        min-height: 750px;
       }
     `,
   ],
+  imports: [CommonModule],
 })
-export default class PostCardComponent {}
+export default class PostCardComponent {
+  @Input() postData!: Post;
+}

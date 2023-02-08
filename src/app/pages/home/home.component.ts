@@ -24,7 +24,7 @@ import { Post } from 'src/app/models/post';
         </div>
         <div class="row">
           <div class="col-md-4 mt-3" *ngFor="let post of featured">
-            <app-post-card></app-post-card>
+            <app-post-card [postData]="post"></app-post-card>
           </div>
         </div>
       </div>
@@ -36,8 +36,8 @@ import { Post } from 'src/app/models/post';
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
 
         <div class="row">
-          <div class="col-md-4 mt-3" *ngFor="let post of latest">
-            <app-post-card></app-post-card>
+          <div class="col-md-4 mt-4" *ngFor="let post of latest">
+            <app-post-card [postData]="post"></app-post-card>
           </div>
         </div>
       </div>
@@ -63,26 +63,21 @@ export default class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.postsService
-      .getWithQuery(`isFeatured=true`)
+      .getFeatured('createdAt', 'desc', 3)
       .pipe(takeUntil(this.componentIsDestroyed))
       .subscribe({
-        next: (data) => (this.featured = data),
+        next: (data) => {
+          this.featured = data;
+        },
       });
-    let date = new Date();
-    date.setDate(date.getDate() - 30);
-    const dateStr = `${date.getFullYear()}-${(date.getMonth() + 1)
-      .toString()
-      .padStart(2, '0')}-${date
-      .getDay()
-      .toString()
-      .padStart(2, '0')}T00:00:000Z`;
-    //2023-01-27T21:17:54.384Z
 
     this.postsService
-      .getWithQuery(`createdAt>=${dateStr}`)
+      .getLatest('createdAt', 'desc', 9)
       .pipe(takeUntil(this.componentIsDestroyed))
       .subscribe({
-        next: (data) => (this.latest = data),
+        next: (data) => {
+          this.latest = data;
+        },
       });
   }
 
