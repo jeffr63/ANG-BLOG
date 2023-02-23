@@ -30,4 +30,25 @@ export class PostsService extends EntityCollectionServiceBase<Post> {
       `${this.baseUrl}/posts?_sort=${fieldName}&_order=${order}&_limit=${limit}&isFeatured=true`
     );
   }
+
+  public getCategory(
+    category: string,
+    fieldName: string,
+    order: string,
+    limit: number
+  ) {
+    return this.http.get<Post[]>(
+      `${this.baseUrl}/posts?=sort=${fieldName}&_order=${order}&_limit=${limit}&category.categoryId=${category}`
+    );
+  }
+
+  public getSimilar(category: number,
+    fieldName: string,
+    order: string,
+    limit: number
+  ) {
+    return this.http.get<Post[]>(
+      `${this.baseUrl}/posts?=sort=${fieldName}&_order=${order}&_limit=${limit}&category.categoryId=${category}`
+    );
+  }
 }

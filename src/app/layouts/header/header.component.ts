@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   template: `
     <header class="navbar navbar-expand-lg fixed-top bg-white">
       <div class="container justify-content-center">
-        <a href="#" class="site-logo"> ANG-BLOG </a>
+        <a class="site-logo" routerLink="/"> ANG-BLOG </a>
       </div>
     </header>
   `,

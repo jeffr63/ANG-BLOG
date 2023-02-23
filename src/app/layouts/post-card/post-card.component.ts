@@ -2,12 +2,17 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { Post } from 'src/app/models/post';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-post-card',
   standalone: true,
   template: `
-    <div class="card shadow-effect" *ngIf="postData">
+    <div
+      class="card shadow-effect"
+      *ngIf="postData"
+      [routerLink]="['/post', postData['id']]"
+    >
       <img
         class="card-img-top"
         src="{{ postData.postImg }}"
@@ -38,7 +43,7 @@ import { Post } from 'src/app/models/post';
       }
     `,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
 })
 export default class PostCardComponent {
   @Input() postData!: Post;

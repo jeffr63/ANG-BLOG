@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 import { CategoriesService } from 'src/app/services/categories.service';
-import { Category } from 'src/app/models/category';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-category-navbar',
@@ -15,7 +15,9 @@ import { Category } from 'src/app/models/category';
         <div class="collapse navbar-collapse justify-content-center">
           <ul class="navbar-nav" *ngFor="let category of categories$ | async">
             <li class="nav-item ml-3">
-              <a class="nav-link">{{ category.category }}</a>
+              <a class="nav-link" [routerLink]="['/category', category.category, category.id]">{{
+                category.category
+              }}</a>
             </li>
           </ul>
         </div>
@@ -35,7 +37,7 @@ import { Category } from 'src/app/models/category';
       }
     `,
   ],
-  imports: [CommonModule, NgFor],
+  imports: [CommonModule, NgFor, RouterLink],
 })
 export default class CategoryNavbarComponent implements OnInit, OnDestroy {
   componentIsDestroyed = new Subject<boolean>();

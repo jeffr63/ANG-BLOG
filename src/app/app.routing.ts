@@ -5,13 +5,13 @@ import HomeComponent from './pages/home/home.component';
 export const APP_ROUTES: Routes = [
   { path: '', title: 'Home', component: HomeComponent },
   {
-    path: 'category',
+    path: 'category/:category/:id',
     title: 'Category',
     loadComponent: () =>
       import('./pages/single-category/single-category.component'),
   },
   {
-    path: 'post',
+    path: 'post/:id',
     title: 'Post',
     loadComponent: () => import('./pages/single-post/single-post.component'),
   },
