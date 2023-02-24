@@ -32,8 +32,11 @@ import { Subject, takeUntil } from 'rxjs';
               <small class="bg-light text-danger text-center">
                 {{ post.category.category }}
               </small>
-              <small class="bg-light text-success text-center ml-2">
-                {{ post.isFeatured ? 'Featured' : '' }}
+              <small
+                class="bg-light text-success text-center ml-2"
+                *ngIf="post.isFeatured == 'true'"
+              >
+                Featured
               </small>
               <small class="bg-light text-info text-center ml-2">
                 Views - {{ post.views | number }}
@@ -76,6 +79,7 @@ export default class SinglePostComponent implements OnInit, OnDestroy {
         .subscribe({
           next: (data) => {
             this.post = data;
+            this.postsService.updateViews(this.post);
             this.loadSimilar(data.category['categoryId']);
           },
         });
@@ -88,7 +92,6 @@ export default class SinglePostComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.componentIsDestroyed))
       .subscribe({
         next: (data) => {
-          console.log(data);
           this.similar = data;
         },
       });

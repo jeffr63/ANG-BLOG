@@ -22,7 +22,11 @@ import { RouterLink } from '@angular/router';
         <small class="bg-light text-danger text-center">{{
           postData.category.category
         }}</small>
-        <small class="bg-light text-success text-center ml-3">Featured</small>
+        <small
+          class="bg-light text-success text-center ml-3"
+          *ngIf="postData.isFeatured == 'true'"
+          >Featured</small
+        >
         <small class="bg-light text-info text-center ml-3"
           >Views - {{ postData.views }}</small
         >

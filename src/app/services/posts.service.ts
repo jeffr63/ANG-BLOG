@@ -42,7 +42,8 @@ export class PostsService extends EntityCollectionServiceBase<Post> {
     );
   }
 
-  public getSimilar(category: number,
+  public getSimilar(
+    category: number,
     fieldName: string,
     order: string,
     limit: number
@@ -50,5 +51,11 @@ export class PostsService extends EntityCollectionServiceBase<Post> {
     return this.http.get<Post[]>(
       `${this.baseUrl}/posts?=sort=${fieldName}&_order=${order}&_limit=${limit}&category.categoryId=${category}`
     );
+  }
+
+  public updateViews(post: Post) {
+    let postData = { ...post };
+    postData.views++;
+    this.update(postData);
   }
 }
